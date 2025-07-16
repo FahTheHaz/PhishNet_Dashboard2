@@ -16,7 +16,7 @@ export default function SystemSettings() {
       <div>
         <h1 className="text-3xl font-bold">System Settings</h1>
         <p className="text-muted-foreground">
-          Configure system-wide settings and preferences for the PhishGuard platform
+          Configure system-wide settings and preferences for the PhishNet platform
         </p>
       </div>
 
@@ -44,7 +44,7 @@ export default function SystemSettings() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="platform-name">Platform Name</Label>
-                  <Input id="platform-name" value="PhishGuard AI" />
+                  <Input id="platform-name" value="PhishNet AI" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="platform-version">Platform Version</Label>
@@ -54,7 +54,7 @@ export default function SystemSettings() {
 
               <div className="space-y-2">
                 <Label htmlFor="support-email">Support Email</Label>
-                <Input id="support-email" type="email" value="support@phishguard.ai" />
+                <Input id="support-email" type="email" value="support@phishnet.ai" />
               </div>
 
               <div className="space-y-2">
@@ -177,7 +177,7 @@ export default function SystemSettings() {
             <CardContent className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="admin-email">Admin Email for Alerts</Label>
-                <Input id="admin-email" type="email" value="admin@phishguard.ai" />
+                <Input id="admin-email" type="email" value="admin@phishnet.ai" />
               </div>
 
               <Separator />

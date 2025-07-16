@@ -92,7 +92,7 @@ export default function ApiKeys() {
         <div>
           <h1 className="text-3xl font-bold">API Keys</h1>
           <p className="text-muted-foreground">
-            Manage your API keys for accessing the PhishGuard email security service
+            Manage your API keys for accessing the PhishNet email security service
           </p>
         </div>
         <Dialog>

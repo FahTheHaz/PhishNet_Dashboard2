@@ -39,11 +39,11 @@ export function AppHeader() {
         
         {/* Company Logo */}
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-            <Shield className="w-5 h-5 text-white" />
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+            <img src="/lovable-uploads/0911929d-f89d-4f35-8e2f-893150131aac.png" alt="PhishNet Logo" className="w-8 h-8 object-contain" />
           </div>
           <div className="hidden md:block">
-            <h1 className="font-bold text-lg">PhishGuard AI</h1>
+            <h1 className="font-bold text-lg">PhishNet AI</h1>
             <p className="text-xs text-muted-foreground">Email Security Platform</p>
           </div>
         </div>

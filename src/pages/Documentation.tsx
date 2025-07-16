@@ -16,7 +16,7 @@ export default function Documentation() {
       <div>
         <h1 className="text-3xl font-bold">Documentation</h1>
         <p className="text-muted-foreground">
-          Complete guide to integrating and using the PhishGuard AI email security service
+          Complete guide to integrating and using the PhishNet AI email security service
         </p>
       </div>
 

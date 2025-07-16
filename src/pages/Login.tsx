@@ -76,11 +76,11 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-accent/5 p-4">
       <Card className="w-full max-w-md shadow-elegant">
         <CardHeader className="text-center space-y-4">
-          <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center">
-            <Shield className="w-8 h-8 text-white" />
+          <div className="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center">
+            <img src="/lovable-uploads/0911929d-f89d-4f35-8e2f-893150131aac.png" alt="PhishNet Logo" className="w-16 h-16 object-contain" />
           </div>
           <div>
-            <CardTitle className="text-2xl font-bold">Welcome to PhishGuard</CardTitle>
+            <CardTitle className="text-2xl font-bold">Welcome to PhishNet</CardTitle>
             <CardDescription>
               Sign in to access your AI email security dashboard
             </CardDescription>
