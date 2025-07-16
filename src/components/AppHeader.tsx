@@ -11,15 +11,24 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
+import { useAuth } from "@/contexts/AuthContext"
+import { useNavigate } from "react-router-dom"
 
 export function AppHeader() {
-  // Mock user data - replace with actual auth
-  const user = {
-    name: "John Doe",
-    email: "john.doe@company.com",
-    avatar: "",
-    role: "Admin"
+  const { user, signOut } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    await signOut()
+    navigate("/login")
   }
+
+  const userInitials = user?.user_metadata?.full_name
+    ? user.user_metadata.full_name.split(' ').map((n: string) => n[0]).join('').toUpperCase()
+    : user?.email?.charAt(0).toUpperCase() || 'U'
+
+  const userName = user?.user_metadata?.full_name || user?.user_metadata?.username || 'User'
+  const userRole = user?.user_metadata?.role || 'User'
 
   const notificationCount = 3
 
@@ -56,22 +65,22 @@ export function AppHeader() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="flex items-center gap-3 p-2">
               <Avatar className="w-8 h-8">
-                <AvatarImage src={user.avatar} alt={user.name} />
+                <AvatarImage src={user?.user_metadata?.avatar_url} alt={userName} />
                 <AvatarFallback className="bg-primary text-primary-foreground">
-                  {user.name.split(' ').map(n => n[0]).join('')}
+                  {userInitials}
                 </AvatarFallback>
               </Avatar>
               <div className="hidden md:block text-left">
-                <p className="text-sm font-medium">{user.name}</p>
-                <p className="text-xs text-muted-foreground">{user.role}</p>
+                <p className="text-sm font-medium">{userName}</p>
+                <p className="text-xs text-muted-foreground">{userRole}</p>
               </div>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
             <DropdownMenuLabel>
               <div>
-                <p className="text-sm font-medium">{user.name}</p>
-                <p className="text-xs text-muted-foreground">{user.email}</p>
+                <p className="text-sm font-medium">{userName}</p>
+                <p className="text-xs text-muted-foreground">{user?.email}</p>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -84,7 +93,7 @@ export function AppHeader() {
               Account Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-destructive">
+            <DropdownMenuItem className="text-destructive" onClick={handleLogout}>
               <LogOut className="mr-2 h-4 w-4" />
               Log out
             </DropdownMenuItem>

@@ -4,6 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from "@/components/Layout";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ApiKeys from "./pages/ApiKeys";
@@ -17,30 +19,56 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          {/* Public routes */}
-          <Route path="/login" element={<Login />} />
-          
-          {/* Protected routes with layout */}
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
-          <Route path="/api-keys" element={<Layout><ApiKeys /></Layout>} />
-          <Route path="/recent-scans" element={<Layout><RecentScans /></Layout>} />
-          <Route path="/documentation" element={<Layout><Documentation /></Layout>} />
-          
-          {/* Admin routes */}
-          <Route path="/admin/users" element={<Layout><UserManagement /></Layout>} />
-          <Route path="/admin/settings" element={<Layout><SystemSettings /></Layout>} />
-          
-          {/* 404 catch-all */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <AuthProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            {/* Public routes */}
+            <Route path="/login" element={<Login />} />
+            
+            {/* Protected routes with layout */}
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Layout><Dashboard /></Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/api-keys" element={
+              <ProtectedRoute>
+                <Layout><ApiKeys /></Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/recent-scans" element={
+              <ProtectedRoute>
+                <Layout><RecentScans /></Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/documentation" element={
+              <ProtectedRoute>
+                <Layout><Documentation /></Layout>
+              </ProtectedRoute>
+            } />
+            
+            {/* Admin routes */}
+            <Route path="/admin/users" element={
+              <ProtectedRoute>
+                <Layout><UserManagement /></Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/settings" element={
+              <ProtectedRoute>
+                <Layout><SystemSettings /></Layout>
+              </ProtectedRoute>
+            } />
+            
+            {/* 404 catch-all */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 
