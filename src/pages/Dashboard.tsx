@@ -1,4 +1,4 @@
-import { Activity, Shield, Key, AlertTriangle, TrendingUp, Users, Mail, Clock } from "lucide-react"
+import { Activity, Shield, Key, AlertTriangle, TrendingUp, Users, Mail, Clock, BarChart3 } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
@@ -6,35 +6,36 @@ import { Badge } from "@/components/ui/badge"
 export default function Dashboard() {
   // Mock data - replace with actual API calls
   const stats = {
-    totalScans: 15420,
-    flaggedEmails: 1240,
-    activeApiKeys: 8,
-    activeUsers: 24,
-    scanAccuracy: 98.5,
-    responseTime: 45
+    apiRequestsToday: 15420,
+    rateLimitUsage: 78,
+    activeApiKeys: 23,
+    registeredUsers: 156,
+    modelAccuracy: 96.2,
+    responseTime: 85,
+    quotaUsage: 67
   }
 
-  const recentScans = [
-    { id: 1, email: "suspicious@fake-bank.com", status: "flagged", confidence: 95, time: "2 minutes ago" },
-    { id: 2, email: "newsletter@company.com", status: "safe", confidence: 92, time: "5 minutes ago" },
-    { id: 3, email: "urgent@phishing-site.net", status: "flagged", confidence: 98, time: "8 minutes ago" },
-    { id: 4, email: "support@legitimate.com", status: "safe", confidence: 89, time: "12 minutes ago" },
+  const recentRequests = [
+    { id: 1, endpoint: "/api/v1/analyze", requests: 2456, latency: "120ms", time: "2 minutes ago" },
+    { id: 2, endpoint: "/api/v1/classify", requests: 1834, latency: "95ms", time: "5 minutes ago" },
+    { id: 3, endpoint: "/api/v1/scan", requests: 892, latency: "180ms", time: "8 minutes ago" },
+    { id: 4, endpoint: "/api/v1/detect", requests: 634, latency: "110ms", time: "12 minutes ago" },
   ]
 
-  const blacklistedDomains = [
-    "fake-paypal.scam",
-    "phishing-bank.net", 
-    "malicious-site.org",
-    "scammer-domain.fake"
+  const recentUsers = [
+    { email: "user@company.com", status: "active" },
+    { email: "admin@phishnet.ai", status: "online" }, 
+    { email: "dev@startup.io", status: "idle" },
+    { email: "client@business.org", status: "active" }
   ]
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
         <p className="text-muted-foreground">
-          Monitor your AI email security system performance and analytics
+          Monitor AI model performance, API usage, and manage users
         </p>
       </div>
 
@@ -42,26 +43,26 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Scans</CardTitle>
+            <CardTitle className="text-sm font-medium">API Requests Today</CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalScans.toLocaleString()}</div>
+            <div className="text-2xl font-bold">{stats.apiRequestsToday.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">
-              <span className="text-success">+12.5%</span> from last month
+              <span className="text-success">+12%</span> from yesterday
             </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Flagged Emails</CardTitle>
+            <CardTitle className="text-sm font-medium">Rate Limit Usage</CardTitle>
             <AlertTriangle className="h-4 w-4 text-warning" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.flaggedEmails.toLocaleString()}</div>
+            <div className="text-2xl font-bold">{stats.rateLimitUsage}%</div>
             <p className="text-xs text-muted-foreground">
-              <span className="text-warning">8.04%</span> of total scans
+              <span className="text-warning">+5%</span> from last hour
             </p>
           </CardContent>
         </Card>
@@ -81,13 +82,13 @@ export default function Dashboard() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Users</CardTitle>
+            <CardTitle className="text-sm font-medium">Registered Users</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.activeUsers}</div>
+            <div className="text-2xl font-bold">{stats.registeredUsers}</div>
             <p className="text-xs text-muted-foreground">
-              <span className="text-success">+3</span> from last week
+              <span className="text-success">+18%</span> from last week
             </p>
           </CardContent>
         </Card>
@@ -97,16 +98,19 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>AI Model Performance</CardTitle>
-            <CardDescription>Real-time accuracy and response metrics</CardDescription>
+            <CardTitle className="flex items-center gap-2">
+              <BarChart3 className="w-5 h-5" />
+              AI Model Performance
+            </CardTitle>
+            <CardDescription>Real-time model metrics and API performance</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium">Scan Accuracy</span>
-                <span className="text-sm text-muted-foreground">{stats.scanAccuracy}%</span>
+                <span className="text-sm font-medium">Model Accuracy</span>
+                <span className="text-sm text-muted-foreground">{stats.modelAccuracy}%</span>
               </div>
-              <Progress value={stats.scanAccuracy} className="h-2" />
+              <Progress value={stats.modelAccuracy} className="h-2" />
             </div>
             <div>
               <div className="flex items-center justify-between mb-2">
@@ -115,20 +119,32 @@ export default function Dashboard() {
               </div>
               <Progress value={85} className="h-2" />
             </div>
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium">API Quota Usage</span>
+                <span className="text-sm text-muted-foreground">{stats.quotaUsage}%</span>
+              </div>
+              <Progress value={stats.quotaUsage} className="h-2" />
+            </div>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>Blacklisted Domains</CardTitle>
-            <CardDescription>Currently blocked suspicious domains</CardDescription>
+            <CardTitle className="flex items-center gap-2">
+              <Users className="w-5 h-5" />
+              Recent User Activity
+            </CardTitle>
+            <CardDescription>Latest user registrations and activity</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              {blacklistedDomains.map((domain, index) => (
-                <div key={index} className="flex items-center justify-between p-2 bg-destructive/10 rounded">
-                  <span className="text-sm font-mono">{domain}</span>
-                  <Badge variant="destructive">Blocked</Badge>
+              {recentUsers.map((user, index) => (
+                <div key={index} className="flex items-center justify-between p-2 bg-muted/50 rounded">
+                  <span className="text-sm">{user.email}</span>
+                  <Badge variant={user.status === "online" ? "default" : user.status === "active" ? "outline" : "secondary"}>
+                    {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
+                  </Badge>
                 </div>
               ))}
             </div>
@@ -139,27 +155,30 @@ export default function Dashboard() {
       {/* Recent Activity */}
       <Card>
         <CardHeader>
-          <CardTitle>Recent Scans</CardTitle>
-          <CardDescription>Latest email security analysis results</CardDescription>
+          <CardTitle className="flex items-center gap-2">
+            <BarChart3 className="w-5 h-5" />
+            API Endpoint Usage
+          </CardTitle>
+          <CardDescription>Latest API endpoint performance and usage metrics</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {recentScans.map((scan) => (
-              <div key={scan.id} className="flex items-center justify-between p-3 border rounded-lg">
+            {recentRequests.map((request) => (
+              <div key={request.id} className="flex items-center justify-between p-3 border rounded-lg">
                 <div className="flex items-center gap-3">
-                  <Mail className="h-4 w-4 text-muted-foreground" />
+                  <Shield className="h-4 w-4 text-muted-foreground" />
                   <div>
-                    <p className="font-medium">{scan.email}</p>
-                    <p className="text-sm text-muted-foreground">Confidence: {scan.confidence}%</p>
+                    <p className="font-medium">{request.endpoint}</p>
+                    <p className="text-sm text-muted-foreground">{request.requests} requests</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Badge variant={scan.status === "flagged" ? "destructive" : "default"}>
-                    {scan.status === "flagged" ? "Flagged" : "Safe"}
+                  <Badge variant="outline">
+                    {request.latency}
                   </Badge>
                   <div className="flex items-center gap-1 text-sm text-muted-foreground">
                     <Clock className="h-3 w-3" />
-                    {scan.time}
+                    {request.time}
                   </div>
                 </div>
               </div>

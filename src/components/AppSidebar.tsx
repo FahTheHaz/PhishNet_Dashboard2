@@ -48,12 +48,12 @@ export function AppSidebar() {
         {/* Logo/Brand */}
         <div className={`flex items-center gap-2 p-4 border-b ${collapsed ? 'justify-center' : ''}`}>
           <div className="w-8 h-8 rounded-lg flex items-center justify-center">
-            <img src="/lovable-uploads/0911929d-f89d-4f35-8e2f-893150131aac.png" alt="PhishNet Logo" className="w-8 h-8 object-contain" />
+            <img src="/lovable-uploads/1f99859d-6afa-4514-85bd-728516eb1fbb.png" alt="PhishNet Logo" className="w-8 h-8 object-contain" />
           </div>
           {!collapsed && (
             <div>
               <h2 className="font-bold text-lg">PhishNet</h2>
-              <p className="text-xs text-muted-foreground">AI Protection</p>
+              <p className="text-xs text-muted-foreground">Admin Portal</p>
             </div>
           )}
         </div>
