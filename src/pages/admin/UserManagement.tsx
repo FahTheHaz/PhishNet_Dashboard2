@@ -34,6 +34,34 @@ interface User {
 }
 
 export default function UserManagement() {
+  // TODO: Replace these placeholder functions with actual Firebase/Supabase calls
+  const handleAddUser = () => {
+    console.log("Add user clicked");
+    // PLACEHOLDER: Replace with actual user creation logic
+    // This should:
+    // 1. Open a modal/form for user details
+    // 2. Create user in Firebase/Supabase
+    // 3. Update the users list
+  };
+
+  const handleDeleteUser = (userId: string) => {
+    console.log("Delete user clicked:", userId);
+    // PLACEHOLDER: Replace with actual user deletion logic
+    // This should:
+    // 1. Show confirmation dialog
+    // 2. Delete user from Firebase/Supabase
+    // 3. Update the users list
+  };
+
+  const handleEditUser = (userId: string) => {
+    console.log("Edit user clicked:", userId);
+    // PLACEHOLDER: Replace with actual user editing logic
+    // This should:
+    // 1. Open edit form with current user data
+    // 2. Update user in Firebase/Supabase
+    // 3. Refresh the users list
+  };
+
   // Mock data - replace with actual API calls
   const users: User[] = [
     {
@@ -123,7 +151,7 @@ export default function UserManagement() {
             Manage user accounts, permissions, and access controls
           </p>
         </div>
-        <Button>
+        <Button onClick={handleAddUser}>
           <UserPlus className="w-4 h-4 mr-2" />
           Add New User
         </Button>
@@ -270,12 +298,15 @@ export default function UserManagement() {
                           <Eye className="mr-2 h-4 w-4" />
                           View Details
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleEditUser(user.id)}>
                           <Edit className="mr-2 h-4 w-4" />
                           Edit User
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="text-destructive">
+                        <DropdownMenuItem 
+                          className="text-destructive"
+                          onClick={() => handleDeleteUser(user.id)}
+                        >
                           <Trash2 className="mr-2 h-4 w-4" />
                           Delete User
                         </DropdownMenuItem>

@@ -14,16 +14,20 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 
-const mainItems = [
+const adminItems = [
   { title: "Dashboard", url: "/dashboard", icon: BarChart3 },
   { title: "API Keys", url: "/api-keys", icon: Key },
   { title: "Recent Scans", url: "/recent-scans", icon: Clock },
+  { title: "User Management", url: "/admin/users", icon: Users },
+  { title: "System Settings", url: "/admin/settings", icon: Settings },
   { title: "Documentation", url: "/documentation", icon: FileText },
 ]
 
-const adminItems = [
-  { title: "User Management", url: "/admin/users", icon: Users },
-  { title: "System Settings", url: "/admin/settings", icon: Settings },
+const userItems = [
+  { title: "Dashboard", url: "/dashboard", icon: BarChart3 },
+  { title: "Products", url: "/products", icon: Key },
+  { title: "Recent Scans", url: "/recent-scans", icon: Clock },
+  { title: "Documentation", url: "/documentation", icon: FileText },
 ]
 
 export function AppSidebar() {
@@ -37,7 +41,9 @@ export function AppSidebar() {
     isActive ? "bg-primary/10 text-primary font-medium border-r-2 border-primary" : "hover:bg-muted/50"
 
   // Mock admin check - replace with actual auth logic
-  const isAdmin = true
+  const isAdmin = true // TODO: Replace with actual role check from auth context
+  
+  const navigationItems = isAdmin ? adminItems : userItems
 
   return (
     <Sidebar
@@ -59,10 +65,10 @@ export function AppSidebar() {
         </div>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Main</SidebarGroupLabel>
+          <SidebarGroupLabel>{isAdmin ? "Admin Portal" : "Main"}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {mainItems.map((item) => (
+              {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <NavLink to={item.url} className={getNavCls}>
@@ -75,26 +81,6 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-
-        {isAdmin && (
-          <SidebarGroup>
-            <SidebarGroupLabel>Admin</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {adminItems.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
-                      <NavLink to={item.url} className={getNavCls}>
-                        <item.icon className="w-4 h-4" />
-                        {!collapsed && <span>{item.title}</span>}
-                      </NavLink>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        )}
       </SidebarContent>
     </Sidebar>
   )

@@ -9,6 +9,7 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ApiKeys from "./pages/ApiKeys";
+import Products from "./pages/Products";
 import RecentScans from "./pages/RecentScans";
 import Documentation from "./pages/Documentation";
 import UserManagement from "./pages/admin/UserManagement";
@@ -38,6 +39,11 @@ const App = () => (
             <Route path="/api-keys" element={
               <ProtectedRoute>
                 <Layout><ApiKeys /></Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/products" element={
+              <ProtectedRoute>
+                <Layout><Products /></Layout>
               </ProtectedRoute>
             } />
             <Route path="/recent-scans" element={
