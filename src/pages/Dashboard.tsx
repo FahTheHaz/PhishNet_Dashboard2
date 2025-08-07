@@ -6,27 +6,24 @@ import { Badge } from "@/components/ui/badge"
 export default function Dashboard() {
   // Mock data - replace with actual API calls
   const stats = {
-    apiRequestsToday: 15420,
-    rateLimitUsage: 78,
-    activeApiKeys: 23,
-    registeredUsers: 156,
-    modelAccuracy: 96.2,
-    responseTime: 85,
-    quotaUsage: 67
+    apiRequestsToday: 1,
+    activeApiKeys: 1,
+    registeredUsers: 4,
+    modelAccuracy: 1,
   }
 
   const recentRequests = [
-    { id: 1, endpoint: "/api/v1/analyze", requests: 2456, latency: "120ms", time: "2 minutes ago" },
-    { id: 2, endpoint: "/api/v1/classify", requests: 1834, latency: "95ms", time: "5 minutes ago" },
-    { id: 3, endpoint: "/api/v1/scan", requests: 892, latency: "180ms", time: "8 minutes ago" },
-    { id: 4, endpoint: "/api/v1/detect", requests: 634, latency: "110ms", time: "12 minutes ago" },
+    { id: 1, endpoint: "/api/v1/analyze", requests: 0, latency: "0ms", time: "—" },
+    { id: 2, endpoint: "/api/v1/classify", requests: 0, latency: "0ms", time: "—" },
+    { id: 3, endpoint: "/api/v1/scan", requests: 0, latency: "0ms", time: "—" },
+    { id: 4, endpoint: "/api/v1/detect", requests: 0, latency: "0ms", time: "—" },
   ]
 
   const recentUsers = [
-    { email: "user@company.com", status: "active" },
-    { email: "admin@phishnet.ai", status: "online" }, 
-    { email: "dev@startup.io", status: "idle" },
-    { email: "client@business.org", status: "active" }
+    { email: "Fahimhaziq1@gmail.com", status: "active" },
+    { email: "exampleuser@email.com", status: "active" },
+    { email: "exampleuser2@email.com", status: "active" },
+    { email: "livingliverlibe@gmail.com", status: "active" },
   ]
 
   return (
@@ -40,7 +37,7 @@ export default function Dashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">API Requests Today</CardTitle>
@@ -54,18 +51,6 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Rate Limit Usage</CardTitle>
-            <AlertTriangle className="h-4 w-4 text-warning" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.rateLimitUsage}%</div>
-            <p className="text-xs text-muted-foreground">
-              <span className="text-warning">+5%</span> from last hour
-            </p>
-          </CardContent>
-        </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -105,27 +90,16 @@ export default function Dashboard() {
             <CardDescription>Real-time model metrics and API performance</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium">Model Accuracy</span>
-                <span className="text-sm text-muted-foreground">{stats.modelAccuracy}%</span>
+            <div className="flex items-end gap-6">
+              <div className="text-5xl font-bold">{stats.modelAccuracy}%</div>
+              <div className="relative h-48 w-10 rounded bg-muted">
+                <div
+                  className="absolute bottom-0 left-0 w-full rounded-b bg-primary"
+                  style={{ height: `${stats.modelAccuracy}%` }}
+                />
               </div>
-              <Progress value={stats.modelAccuracy} className="h-2" />
             </div>
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium">Avg Response Time</span>
-                <span className="text-sm text-muted-foreground">{stats.responseTime}ms</span>
-              </div>
-              <Progress value={85} className="h-2" />
-            </div>
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium">API Quota Usage</span>
-                <span className="text-sm text-muted-foreground">{stats.quotaUsage}%</span>
-              </div>
-              <Progress value={stats.quotaUsage} className="h-2" />
-            </div>
+            <p className="text-sm text-muted-foreground">Model accuracy (last 24h)</p>
           </CardContent>
         </Card>
 
@@ -142,9 +116,6 @@ export default function Dashboard() {
               {recentUsers.map((user, index) => (
                 <div key={index} className="flex items-center justify-between p-2 bg-muted/50 rounded">
                   <span className="text-sm">{user.email}</span>
-                  <Badge variant={user.status === "online" ? "default" : user.status === "active" ? "outline" : "secondary"}>
-                    {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
-                  </Badge>
                 </div>
               ))}
             </div>

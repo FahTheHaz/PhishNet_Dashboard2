@@ -31,6 +31,12 @@ export function AppHeader() {
   const userRole = user?.user_metadata?.role || 'User'
 
   const notificationCount = 3
+  const isUserView = (typeof window !== 'undefined' && localStorage.getItem('viewMode') === 'user')
+  const toggleViewMode = () => {
+    const next = isUserView ? 'admin' : 'user'
+    localStorage.setItem('viewMode', next)
+    window.location.reload()
+  }
 
   return (
     <header className="h-16 border-b bg-background flex items-center justify-between px-4">
@@ -43,7 +49,7 @@ export function AppHeader() {
             <img src="/lovable-uploads/1f99859d-6afa-4514-85bd-728516eb1fbb.png" alt="PhishNet Logo" className="w-8 h-8 object-contain" />
           </div>
           <div className="hidden md:block">
-            <h1 className="font-bold text-lg">PhishNet Admin</h1>
+            <h1 className="font-bold text-lg flex items-center gap-2">PhishNet Admin {isUserView && <Badge variant="secondary">User view</Badge>}</h1>
             <p className="text-xs text-muted-foreground">AI Model Management</p>
           </div>
         </div>
@@ -58,6 +64,9 @@ export function AppHeader() {
               {notificationCount}
             </Badge>
           )}
+        </Button>
+        <Button variant="outline" size="sm" onClick={toggleViewMode}>
+          {isUserView ? "Back to Admin view" : "User view"}
         </Button>
 
         {/* User Menu */}

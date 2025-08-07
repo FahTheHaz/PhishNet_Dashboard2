@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { BarChart3, Key, Shield, Users, FileText, Settings, Clock, Home } from "lucide-react"
+import { BarChart3, Key, Shield, Users, FileText, Settings, Clock, Home, Chrome } from "lucide-react"
 import { NavLink, useLocation } from "react-router-dom"
 
 import {
@@ -25,7 +25,8 @@ const adminItems = [
 
 const userItems = [
   { title: "Dashboard", url: "/dashboard", icon: BarChart3 },
-  { title: "Products", url: "/products", icon: Key },
+  { title: "Browser Extension", url: "/extension", icon: Chrome },
+  { title: "API Keys", url: "/api-keys", icon: Key },
   { title: "Recent Scans", url: "/recent-scans", icon: Clock },
   { title: "Documentation", url: "/documentation", icon: FileText },
 ]
@@ -41,7 +42,7 @@ export function AppSidebar() {
     isActive ? "bg-primary/10 text-primary font-medium border-r-2 border-primary" : "hover:bg-muted/50"
 
   // Mock admin check - replace with actual auth logic
-  const isAdmin = true // TODO: Replace with actual role check from auth context
+  const isAdmin = typeof window !== "undefined" ? localStorage.getItem("viewMode") !== "user" : true // TODO: Replace with actual role check from auth context
   
   const navigationItems = isAdmin ? adminItems : userItems
 

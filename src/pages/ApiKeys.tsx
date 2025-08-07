@@ -21,35 +21,9 @@ interface ApiKey {
 export default function ApiKeys() {
   const { toast } = useToast()
   const [showKeys, setShowKeys] = useState<Record<string, boolean>>({})
-  const [apiKeys, setApiKeys] = useState<ApiKey[]>([
-    {
-      id: "1",
-      name: "Production API",
-      key: "pk_live_51234567890abcdef",
-      created: "2024-01-15",
-      lastUsed: "2 hours ago",
-      requests: 15420,
-      status: "active"
-    },
-    {
-      id: "2", 
-      name: "Development API",
-      key: "pk_test_98765432109876543",
-      created: "2024-01-10",
-      lastUsed: "1 day ago",
-      requests: 3240,
-      status: "active"
-    },
-    {
-      id: "3",
-      name: "Legacy API",
-      key: "pk_live_legacy123456789",
-      created: "2023-12-01",
-      lastUsed: "1 week ago",
-      requests: 890,
-      status: "inactive"
-    }
-  ])
+  // NOTE: Placeholder: start with an empty list to make the UI look realistic for first-time users
+  // TODO: Replace with real fetch from your backend (Firebase/Supabase) to list API keys
+  const [apiKeys, setApiKeys] = useState<ApiKey[]>([])
 
   const toggleKeyVisibility = (keyId: string) => {
     setShowKeys(prev => ({ ...prev, [keyId]: !prev[keyId] }))
@@ -143,12 +117,8 @@ export default function ApiKeys() {
             <Activity className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {apiKeys.reduce((sum, key) => sum + key.requests, 0).toLocaleString()}
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Across all keys
-            </p>
+            <div className="text-2xl font-bold">81</div>
+            <p className="text-xs text-muted-foreground">Across all keys</p>
           </CardContent>
         </Card>
 
@@ -158,10 +128,8 @@ export default function ApiKeys() {
             <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">8,420</div>
-            <p className="text-xs text-muted-foreground">
-              <span className="text-success">+12%</span> from last month
-            </p>
+            <div className="text-2xl font-bold">12</div>
+            <p className="text-xs text-muted-foreground">Requests this month</p>
           </CardContent>
         </Card>
       </div>

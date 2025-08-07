@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ApiKeys from "./pages/ApiKeys";
 import Products from "./pages/Products";
+import Extension from "./pages/Extension";
 import RecentScans from "./pages/RecentScans";
 import Documentation from "./pages/Documentation";
 import UserManagement from "./pages/admin/UserManagement";
@@ -44,6 +45,11 @@ const App = () => (
             <Route path="/products" element={
               <ProtectedRoute>
                 <Layout><Products /></Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/extension" element={
+              <ProtectedRoute>
+                <Layout><Extension /></Layout>
               </ProtectedRoute>
             } />
             <Route path="/recent-scans" element={
