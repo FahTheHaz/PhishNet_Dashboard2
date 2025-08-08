@@ -62,51 +62,50 @@ export default function UserManagement() {
     // 3. Refresh the users list
   };
 
-  // Mock data - replace with actual API calls
   const users: User[] = [
     {
       id: "1",
-      name: "John Doe",
-      email: "john.doe@company.com",
-      role: "admin",
+      name: "Fahimhaziq1@gmail.com", // DISPLAY: using email as name for now
+      email: "Fahimhaziq1@gmail.com",
+      role: "user",
       status: "active",
-      lastLogin: "2 hours ago",
-      apiKeys: 3,
-      totalScans: 15420,
-      createdAt: "2024-01-01"
+      lastLogin: "—",
+      apiKeys: 0,
+      totalScans: 0,
+      createdAt: "—"
     },
     {
       id: "2",
-      name: "Jane Smith",
-      email: "jane.smith@company.com",
+      name: "exampleuser@email.com",
+      email: "exampleuser@email.com",
       role: "user",
       status: "active",
-      lastLogin: "1 day ago",
-      apiKeys: 2,
-      totalScans: 8930,
-      createdAt: "2024-01-05"
+      lastLogin: "—",
+      apiKeys: 0,
+      totalScans: 0,
+      createdAt: "—"
     },
     {
       id: "3",
-      name: "Bob Wilson",
-      email: "bob.wilson@company.com",
+      name: "exampleuser2@email.com",
+      email: "exampleuser2@email.com",
       role: "user",
-      status: "inactive",
-      lastLogin: "1 week ago",
-      apiKeys: 1,
-      totalScans: 2340,
-      createdAt: "2024-01-10"
+      status: "active",
+      lastLogin: "—",
+      apiKeys: 0,
+      totalScans: 0,
+      createdAt: "—"
     },
     {
       id: "4",
-      name: "Alice Johnson",
-      email: "alice.johnson@company.com",
+      name: "livingliverlibe@gmail.com",
+      email: "livingliverlibe@gmail.com",
       role: "user",
-      status: "suspended",
-      lastLogin: "2 weeks ago",
+      status: "active",
+      lastLogin: "—",
       apiKeys: 0,
-      totalScans: 450,
-      createdAt: "2024-01-15"
+      totalScans: 0,
+      createdAt: "—"
     }
   ]
 

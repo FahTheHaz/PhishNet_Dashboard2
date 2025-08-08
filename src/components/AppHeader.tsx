@@ -30,7 +30,7 @@ export function AppHeader() {
   const userName = user?.user_metadata?.full_name || user?.user_metadata?.username || 'User'
   const userRole = user?.user_metadata?.role || 'User'
 
-  const notificationCount = 3
+  const notificationCount = 0
   const isUserView = (typeof window !== 'undefined' && localStorage.getItem('viewMode') === 'user')
   const toggleViewMode = () => {
     const next = isUserView ? 'admin' : 'user'
@@ -57,14 +57,27 @@ export function AppHeader() {
 
       <div className="flex items-center gap-4">
         {/* Notifications */}
-        <Button variant="ghost" size="icon" className="relative">
-          <Bell className="w-5 h-5" />
-          {notificationCount > 0 && (
-            <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center text-xs">
-              {notificationCount}
-            </Badge>
-          )}
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="relative">
+              <Bell className="w-5 h-5" />
+              {notificationCount > 0 && (
+                <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center text-xs">
+                  {notificationCount}
+                </Badge>
+              )}
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-64">
+            <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            {notificationCount === 0 ? (
+              <div className="p-4 text-sm text-muted-foreground">No notifications</div>
+            ) : (
+              <div className="p-2 text-sm">You have {notificationCount} notifications</div>
+            )}
+          </DropdownMenuContent>
+        </DropdownMenu>
         <Button variant="outline" size="sm" onClick={toggleViewMode}>
           {isUserView ? "Back to Admin view" : "User view"}
         </Button>

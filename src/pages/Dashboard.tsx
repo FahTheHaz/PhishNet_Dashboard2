@@ -9,14 +9,11 @@ export default function Dashboard() {
     apiRequestsToday: 1,
     activeApiKeys: 1,
     registeredUsers: 4,
-    modelAccuracy: 1,
+    modelAccuracy: 98,
   }
 
   const recentRequests = [
-    { id: 1, endpoint: "/api/v1/analyze", requests: 0, latency: "0ms", time: "—" },
-    { id: 2, endpoint: "/api/v1/classify", requests: 0, latency: "0ms", time: "—" },
-    { id: 3, endpoint: "/api/v1/scan", requests: 0, latency: "0ms", time: "—" },
-    { id: 4, endpoint: "/api/v1/detect", requests: 0, latency: "0ms", time: "—" },
+    { id: 1, endpoint: "/api/v1/scan", requests: 0, latency: "0ms", time: "—" },
   ]
 
   const recentUsers = [
@@ -91,8 +88,8 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-end gap-6">
-              <div className="text-5xl font-bold">{stats.modelAccuracy}%</div>
-              <div className="relative h-48 w-10 rounded bg-muted">
+              <div className="text-6xl font-bold">{stats.modelAccuracy}%</div>
+              <div className="relative h-48 w-20 rounded bg-muted">
                 <div
                   className="absolute bottom-0 left-0 w-full rounded-b bg-primary"
                   style={{ height: `${stats.modelAccuracy}%` }}

@@ -19,6 +19,7 @@ export default function RecentScans() {
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
   const [timeFilter, setTimeFilter] = useState("week")
+  const isUserView = typeof window !== 'undefined' && localStorage.getItem('viewMode') === 'user'
 
   const scans: EmailScan[] = []
 
@@ -83,6 +84,24 @@ export default function RecentScans() {
           </p>
         </div>
       </div>
+
+      {isUserView && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">Your AI Model Performance</CardTitle>
+            <CardDescription>Accuracy based on your recent scans</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-end gap-6">
+              <div className="text-6xl font-bold">0%</div>
+              <div className="relative h-48 w-20 rounded bg-muted">
+                <div className="absolute bottom-0 left-0 w-full rounded-b bg-primary" style={{ height: `0%` }} />
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground">Model accuracy (your last 24h)</p>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
