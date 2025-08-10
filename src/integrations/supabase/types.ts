@@ -47,6 +47,36 @@ export type Database = {
         }
         Relationships: []
       }
+      usage_logs: {
+        Row: {
+          confidence: number | null
+          created_at: string | null
+          id: number
+          result: string | null
+          sender: string
+          subject: string | null
+          text: string | null
+        }
+        Insert: {
+          confidence?: number | null
+          created_at?: string | null
+          id?: number
+          result?: string | null
+          sender: string
+          subject?: string | null
+          text?: string | null
+        }
+        Update: {
+          confidence?: number | null
+          created_at?: string | null
+          id?: number
+          result?: string | null
+          sender?: string
+          subject?: string | null
+          text?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
